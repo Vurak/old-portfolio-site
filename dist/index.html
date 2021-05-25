@@ -217,9 +217,9 @@
         function Contents(props) {
             
             
-            function handleClick(e) {
+            function handleClick(test) {
                 props.setInfoPanel(!props.infoPanel)
-                console.log(props.infoPanel)
+                console.log(test)
             }
 
             return (
@@ -241,11 +241,10 @@
                             </div>
                             <Title>Projects</Title>
                             <div class="grid grid-cols-1 md:grid-cols-2  xl:grid-cols-3 relative px-2 md:px-20 w-full overflow-auto">
-                                <GridElement title="Dog Nights" span={2} onClick={handleClick}> 
-                                    Dog Nights is my abitious first person survival game I am currently developing in the Unity game engine.
-                                    It is a story about the death of your dog, Paddy ... and Paddy's body's subsequent overtaking by a magicals crystal
-                                    that lands on your front lawn, you must battle off hordes of night creatures that try to desroy the crystal, 
-                                    and by extension, the only thing that remains of your beloved Paddy.
+                                <GridElement title="Dog Nights" span={2} onClick={() => {handleClick(children)}}> 
+                                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Veritatis omnis amet provident reiciendis
+                                    accusamus nobis. Eum minus doloribus quo, distinctio, saepe, sit harum fuga cumque optio possimus 
+                                    id voluptate iusto.
                                     <div className="flex items-center overflow-hidden max-h-96 mt-5"><img src="../img/stove.png" alt="" className="w-full h-auto "/></div>
                                 </GridElement>
                                 <GridElement title="Dog Nights Game"> 
@@ -301,6 +300,18 @@
             
         }
 
+        const MoreInfo = props => {
+
+            return(
+                <div className="flex absolute w-full justify-center items-center">
+                    <div className="flex fixed justify-center items-center mt-auto top-0 h-full w-full bg-purple-even-darker opacity-70 z-0" onClick={props.handleClick}>
+                        <div className="fixed m-auto h-2/3 w-2/3 bg-pink-500 z-40 o-100"/>    
+                    </div>
+                </div>
+            )
+            
+        }
+
         const TestHide = props => {
             const handleClick = () => {
                 props.setInfoPanel(!props.infoPanel)
@@ -312,22 +323,12 @@
                     [<div className="absolute transform transition -translate-x-full ease-in-out duration-700 z-50 bg-purple-even-darker">    
                         {props.children}
                     </div>,
-                    <div className="flex absolute w-full justify-center items-center">
-                        <div className="flex fixed justify-center items-center mt-auto top-0 h-full w-full bg-purple-even-darker opacity-70 z-40" onClick={handleClick}>
-                            <div className="fixed m-auto h-2/3 w-2/3 bg-pink-500 z-40 o-100"/>    
-                        </div>
-                    </div>]
+                    <MoreInfo handleClick={handleClick}/>]
                     :
                     [<div className="absolute transform transition translate-x ease-in-out duration-700 z-50 bg-purple-even-darker">    
                         {props.children}
-                    </div>,<div className="flex absolute w-full justify-center items-center z-0">
-                        <div className="flex fixed justify-center items-center mt-auto top-0 h-full w-full bg-purple-even-darker opacity-70 z-0" onClick={handleClick}>
-                            <div className="fixed m-auto h-2/3 w-2/3 bg-pink-500 z-40 o-100"/>    
-                        </div>
-                    </div>
-                    ]
-                    
-
+                    </div>,
+                    <MoreInfo handleClick={handleClick}/>]
             )
         }
 
